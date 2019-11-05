@@ -6,6 +6,10 @@ class Oyotei < Ovto::App
     item :tab, default: 0
     item :items, default: []
     item :schedules, default: (0...24).map {|time| [time, nil] }
+
+    def formatted_time(time)
+      "#{time}:00"
+    end
   end
 
   class Actions < Ovto::Actions
@@ -24,7 +28,7 @@ class Oyotei < Ovto::App
           o "tbody" do
             state.schedules.each do |schedule|
               o "tr" do
-                o "th", {scope: "row"}, schedule[0]
+                o "th", {scope: "row"}, state.formatted_time(schedule[0])
                 o "td", schedule[1]
               end
             end
