@@ -18,20 +18,37 @@ class Oyotei < Ovto::App
   class MainComponent < Ovto::Component
     def render
       o "div" do
-        o "table", {class: "table"} do
-          o "thead" do
-            o "tr" do
-              o "th", {scope: "col"}, "time"
-              o "th", {scope: "col"}, "content"
-            end
+        o "ul", {class: "nav nav-tabs"} do
+          o "li", {class: "nav-item"} do
+            o "a", {href: "#graphical", class: "nav-link active", "data-toggle": "tab"}, "Graphical"
           end
-          o "tbody" do
-            state.schedules.each do |schedule|
-              o "tr" do
-                o "th", {scope: "row"}, state.formatted_time(schedule[0])
-                o "td", schedule[1]
+          o "li", {class: "nav-item"} do
+            o "a", {href: "#text", class: "nav-link", "data-toggle": "tab"}, "Text"
+          end
+        end
+
+        o "div", {class: "tab-content"} do
+          o "div", {id: "graphical", class: "tab-pane active"} do
+            o "table", {class: "table"} do
+              o "thead" do
+                o "tr" do
+                  o "th", {scope: "col"}, "time"
+                  o "th", {scope: "col"}, "content"
+                end
+              end
+              o "tbody" do
+                state.schedules.each do |schedule|
+                  o "tr" do
+                    o "th", {scope: "row"}, state.formatted_time(schedule[0])
+                    o "td", schedule[1]
+                  end
+                end
               end
             end
+          end
+
+          o "div", {id: "text", class: "tab-pane"} do
+            o "h2", "dummy"
           end
         end
       end
