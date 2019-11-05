@@ -14,7 +14,7 @@ class Oyotei < Ovto::App
               state.schedules.each do |schedule|
                 o "tr" do
                   o "th", {scope: "row"}, state.formatted_time(schedule[0])
-                  o "td", schedule[1]
+                  o "td", {onclick: ->(e){ actions.update_schedule(time: schedule[0]) }}, schedule[1]
                 end
               end
             end

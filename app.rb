@@ -8,7 +8,7 @@ class Oyotei < Ovto::App
   class State < Ovto::State
     item :mode, default: 0
     item :tab, default: 0
-    item :items, default: []
+    item :items, default: ["lunch"]
     item :schedules, default: (0...24).map {|time| [time, nil] }
 
     def formatted_time(time)
@@ -23,6 +23,16 @@ class Oyotei < Ovto::App
   end
 
   class Actions < Ovto::Actions
+    def update_schedule(time: time)
+      new_schedules = state.schedules.map do |schedule|
+        new_schedule = schedule.dup
+        if new_schedule[0] == time
+          new_schedule[1] = state.items[0]
+        end
+        new_schedule
+      end
+      return {schedules: new_schedules}
+    end
   end
 
   class MainComponent < Ovto::Component
