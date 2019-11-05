@@ -14,11 +14,17 @@ class Oyotei < Ovto::App
   class MainComponent < Ovto::Component
     def render
       o "div" do
-        o "table" do
+        o "table", {class: "table"} do
+          o "thead" do
+            o "tr" do
+              o "th", {scope: "col"}, "time"
+              o "th", {scope: "col"}, "content"
+            end
+          end
           o "tbody" do
             state.schedules.each do |schedule|
               o "tr" do
-                o "th", schedule[0]
+                o "th", {scope: "row"}, schedule[0]
                 o "td", schedule[1]
               end
             end
