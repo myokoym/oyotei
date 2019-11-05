@@ -10,6 +10,12 @@ class Oyotei < Ovto::App
     def formatted_time(time)
       "#{time}:00"
     end
+
+    def text_schedules
+      schedules.map {|schedule|
+        "#{"%02d" % schedule[0]}:00 #{schedule[1]}"
+      }.join("\n")
+    end
   end
 
   class Actions < Ovto::Actions
@@ -48,7 +54,7 @@ class Oyotei < Ovto::App
           end
 
           o "div", {id: "text", class: "tab-pane"} do
-            o "h2", "dummy"
+            o "textarea", {cols: "40", rows: "24"}, state.text_schedules
           end
         end
       end
