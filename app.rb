@@ -1,43 +1,32 @@
 require 'ovto'
 
-class MyApp < Ovto::App
+class Oyotei < Ovto::App
   class State < Ovto::State
-    item :celsius, default: 0
-
-    def fahrenheit
-      (celsius * 9 / 5.0) + 32
-    end
+    item :mode, default: 0
+    item :tab, default: 0
+    item :items, default: []
+    item :schedules, default: (0...24).map {|time| [time, nil] }
   end
 
   class Actions < Ovto::Actions
-    def set_celsius(value:)
-      return {celsius: value}
-    end
-
-    def set_fahrenheit(value:)
-      new_celsius = (value - 32) * 5 / 9.0
-      return {celsius: new_celsius}
-    end
   end
 
   class MainComponent < Ovto::Component
     def render
-      o 'div' do
-        o 'span', 'Celcius:'
-        o 'input', {
-          type: 'text',
-          onchange: ->(e){ actions.set_celsius(value: e.target.value.to_i) },
-          value: state.celsius
-        }
-        o 'span', 'Fahrenheit:'
-        o 'input', {
-          type: 'text',
-          onchange: ->(e){ actions.set_fahrenheit(value: e.target.value.to_i) },
-          value: state.fahrenheit
-        }
+      o "div" do
+        o "table" do
+          o "tbody" do
+            state.schedules.each do |schedule|
+              o "tr" do
+                o "th", schedule[0]
+                o "td", schedule[1]
+              end
+            end
+          end
+        end
       end
     end
   end
 end
 
-MyApp.run(id: 'ovto')
+Oyotei.run(id: 'ovto')
