@@ -1,6 +1,7 @@
 require 'ovto'
 
-require "components/timetable"
+require "components/timetable-nav"
+require "components/timetable-body"
 
 class Oyotei < Ovto::App
   class State < Ovto::State
@@ -25,7 +26,10 @@ class Oyotei < Ovto::App
 
   class MainComponent < Ovto::Component
     def render
-      o Timetable
+      o "div" do
+        o TimetableNav
+        o TimetableBody
+      end
     end
   end
 end
