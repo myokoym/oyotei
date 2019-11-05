@@ -23,6 +23,12 @@ class Oyotei < Ovto::App
   end
 
   class Actions < Ovto::Actions
+    def set_item(value: value)
+      new_items = state.items.map {|item| item.dup}
+      new_items[0] = value
+      return {items: new_items}
+    end
+
     def update_schedule(time: time)
       new_schedules = state.schedules.map do |schedule|
         new_schedule = schedule.dup
