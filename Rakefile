@@ -5,5 +5,5 @@ end
 
 desc 'start auto-compiling'
 task :watch do
-  sh 'ifchanged app.rb -d "bundle exec rake"'
+  sh 'ifchanged app.rb components/*.rb -d "bundle exec rake"'
 end
