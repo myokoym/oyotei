@@ -52,7 +52,11 @@ class Oyotei < Ovto::App
       new_schedules = state.raw_schedules.map do |schedule|
         new_schedule = schedule.dup
         if new_schedule[0] == time
-          new_schedule[1] = state.items[0]
+          if new_schedule[1]
+            new_schedule[1] = nil
+          else
+            new_schedule[1] = state.items[0]
+          end
         end
         new_schedule
       end
