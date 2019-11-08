@@ -5,7 +5,7 @@ class Oyotei < Ovto::App
         o "select", {
           onchange: ->(e){ actions.set_begin_time(value: e.target.value) }
         } do
-          (0..state.end_time).each do |i|
+          (state.raw_begin_time..state.end_time).each do |i|
             options = {value: i}
             if i == state.begin_time
               options[:selected] = "selected"
@@ -19,7 +19,7 @@ class Oyotei < Ovto::App
         o "select", {
           onchange: ->(e){ actions.set_end_time(value: e.target.value) }
         } do
-          (state.begin_time...24).each do |i|
+          (state.begin_time...state.raw_end_time).each do |i|
             options = {value: i}
             if i == state.end_time
               options[:selected] = "selected"

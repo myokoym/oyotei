@@ -12,6 +12,8 @@ class Oyotei < Ovto::App
     item :items, default: ["lunch"]
     item :begin_time, default: 0
     item :end_time, default: 23
+    item :raw_begin_time, default: 0
+    item :raw_end_time, default: 24
     item :raw_schedules, default: (0...24).map {|time| [time, nil] }
 
     def formatted_time(time)
