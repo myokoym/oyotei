@@ -10,8 +10,8 @@ class Oyotei < Ovto::App
     item :mode, default: 0
     item :tab, default: 0
     item :items, default: ["lunch"]
-    item :begin_time, default: 0
-    item :end_time, default: 23
+    item :begin_time, default: 6
+    item :end_time, default: 21
     item :raw_begin_time, default: 0
     item :raw_end_time, default: 27
     item :raw_schedules, default: (0...27).map {|time| [time, nil] }
