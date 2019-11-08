@@ -13,8 +13,8 @@ class Oyotei < Ovto::App
     item :begin_time, default: 0
     item :end_time, default: 23
     item :raw_begin_time, default: 0
-    item :raw_end_time, default: 24
-    item :raw_schedules, default: (0...24).map {|time| [time, nil] }
+    item :raw_end_time, default: 27
+    item :raw_schedules, default: (0...27).map {|time| [time, nil] }
 
     def formatted_time(time)
       "#{time}:00"
